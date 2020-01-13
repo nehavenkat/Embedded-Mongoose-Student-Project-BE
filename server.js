@@ -11,8 +11,6 @@ server.use(express.json());
 const port = 3001;
 
 
-
-
 const local = "mongodb://localhost:27017/studentProjects"
 mongoose.connect(
                  local,
