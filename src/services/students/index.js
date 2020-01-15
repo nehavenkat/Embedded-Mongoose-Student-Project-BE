@@ -2,11 +2,27 @@ const express = require('express');
 const router = express.Router();
 const Student = require('./schema');
 
-router.get('/', async (req,res)=> {});
+router.get('/', async (req,res)=> {
+try {
+  const students = await Student.find({})
+  res.send(students)
+} catch (error) {
+  res.send(error);
+}  
+});
 
 router.get('/:id', async (req,res) => {});
 
-router.post('/', async (req,res) => {});
+router.post('/', async (req,res) => {
+  try {
+    const newStudent = new Student(req.body);
+    const {_id} = await newStudent.save();
+    res.send(_id);
+//write comments
+  } catch (error) {
+    res.send(error);
+  }
+});
 
 router.put('/:id', async (req,res)=> {});
 
