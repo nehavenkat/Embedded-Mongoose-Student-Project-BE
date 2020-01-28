@@ -7,7 +7,7 @@ const studentsRouter = require('./src/services/students')
 
 
 const server = express();
-server.use(express.json());
+server.use(express.json());// for POST
 const port = 3001;
 
 
@@ -18,8 +18,13 @@ mongoose.connect(
                  useUnifiedTopology: true} //To opt in to using the new topology engine
                  ).then(db => console.log("MongoDB Connected"),
 err => console.log("ERROR connecting to MongoDb", err))
+
+// TO Check server Listening on PORT in POSTMAN: http://localhost:3001/
+server.get('/',(req,res) => {
+    res.send("I'am listening")
+})
     
-server.use('students', studentsRouter);
+server.use('/students', studentsRouter);
 
 console.log(listEndPoints(server));
 server.listen(port,() => {
